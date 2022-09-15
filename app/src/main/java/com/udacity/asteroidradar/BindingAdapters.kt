@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import com.squareup.picasso.Picasso
 
 @BindingAdapter("statusIcon")
 fun bindAsteroidStatusImage(imageView: ImageView, isHazardous: Boolean) {
@@ -14,7 +15,7 @@ fun bindAsteroidStatusImage(imageView: ImageView, isHazardous: Boolean) {
     }
 }
 
-@BindingAdapter("loadingWheel")
+@BindingAdapter("showProgress")
 fun goneIfNotNull(view: View, it: Int) {
     view.visibility = if (it != 0) View.GONE else View.VISIBLE
 }
@@ -26,6 +27,15 @@ fun bindDetailsStatusImage(imageView: ImageView, isHazardous: Boolean) {
     } else {
         imageView.setImageResource(R.drawable.asteroid_safe)
     }
+}
+
+@BindingAdapter("pictureUrl")
+fun bindUriToImage(imageView: ImageView, strUrl: String?) {
+    Picasso.get()
+        .load(strUrl)
+        .placeholder(R.drawable.placeholder_picture_of_day)
+        .error(R.drawable.placeholder_picture_of_day)
+        .into(imageView)
 }
 
 @BindingAdapter("astronomicalUnitText")

@@ -1,8 +1,6 @@
 package com.udacity.asteroidradar.api
 
-import android.os.Build
 import android.util.Log
-import androidx.annotation.RequiresApi
 import com.udacity.asteroidradar.Asteroid
 import com.udacity.asteroidradar.util.Constants
 import org.json.JSONObject
@@ -11,7 +9,6 @@ import java.util.*
 
 private const val TAG = "NetworkUtils"
 
-@RequiresApi(Build.VERSION_CODES.N)
 fun parseAsteroidsJsonResult(jsonResult: JSONObject): ArrayList<Asteroid> {
     val nearEarthObjectsJson = jsonResult.getJSONObject("near_earth_objects")
 
@@ -52,7 +49,6 @@ fun parseAsteroidsJsonResult(jsonResult: JSONObject): ArrayList<Asteroid> {
 }
 
 
-@RequiresApi(Build.VERSION_CODES.N)
 private fun getNextSevenDaysFormattedDates(): ArrayList<String> {
     val formattedDateList = ArrayList<String>()
 

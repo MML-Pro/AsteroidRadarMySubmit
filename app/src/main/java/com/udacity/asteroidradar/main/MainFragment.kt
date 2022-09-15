@@ -54,7 +54,7 @@ class MainFragment : Fragment() , MenuProvider{
 
         viewModel.navigateToDetailAsteroid.observe(viewLifecycleOwner) { asteroid ->
             if (asteroid != null) {
-                this.findNavController().navigate(MainFragmentDirections.actionShowDetail(asteroid))
+                findNavController().navigate(MainFragmentDirections.actionShowDetail(asteroid))
                 viewModel.onAsteroidNavigated()
             }
         }

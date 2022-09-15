@@ -1,14 +1,11 @@
 package com.udacity.asteroidradar.main
 
 import android.app.Application
-import android.os.Build
 import android.util.Log
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.*
 import com.udacity.asteroidradar.Asteroid
 import com.udacity.asteroidradar.PictureOfDay
 import com.udacity.asteroidradar.api.NasaApiService
-import com.udacity.asteroidradar.api.parseAsteroidsJsonResult
 import com.udacity.asteroidradar.database.getDatabase
 import com.udacity.asteroidradar.repository.AsteroidRepository
 import com.udacity.asteroidradar.util.Constants
@@ -16,10 +13,6 @@ import com.udacity.asteroidradar.util.FilterAsteroid
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.json.JSONObject
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 private const val TAG = "MainViewModel"
 class MainViewModel(application: Application) : AndroidViewModel(application) {
@@ -37,7 +30,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private var _filterAsteroid = MutableLiveData(FilterAsteroid.ALL)
 
-    @RequiresApi(Build.VERSION_CODES.O)
+
     val asteroidList = Transformations.switchMap(_filterAsteroid) {
         when (it!!) {
             FilterAsteroid.WEEK -> asteroidRepository.weekAsteroids

@@ -43,7 +43,7 @@ fun parseAsteroidsJsonResult(jsonResult: JSONObject): ArrayList<Asteroid> {
         }
     }
 
-    Log.d(TAG, "parseAsteroidsJsonResult: ${asteroidList.toString()}")
+    Log.d(TAG, "parseAsteroidsJsonResult: $asteroidList")
 
     return asteroidList
 }

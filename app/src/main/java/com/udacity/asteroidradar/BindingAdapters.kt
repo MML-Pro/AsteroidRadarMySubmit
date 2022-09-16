@@ -28,6 +28,14 @@ fun bindDetailsStatusImage(imageView: ImageView, isHazardous: Boolean) {
         imageView.setImageResource(R.drawable.asteroid_safe)
     }
 }
+@BindingAdapter("contentDescriptionStatusIcon")
+fun bindStatusIcon(imageView: ImageView,isHazardous: Boolean){
+    if (isHazardous) {
+        imageView.contentDescription = "Hazardous asteroid"
+    } else {
+        imageView.contentDescription = "Normal asteroid"
+    }
+}
 
 @BindingAdapter("pictureUrl")
 fun bindUriToImage(imageView: ImageView, strUrl: String?) {

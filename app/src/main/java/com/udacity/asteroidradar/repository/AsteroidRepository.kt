@@ -15,10 +15,11 @@ import com.udacity.asteroidradar.util.Constants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
+import timber.log.Timber
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
-class AsteroidRepository (private val database: AsteroidDatabase) {
+class AsteroidRepository(private val database: AsteroidDatabase) {
 
     private val startDate = LocalDateTime.now()
 
@@ -49,14 +50,12 @@ class AsteroidRepository (private val database: AsteroidDatabase) {
     suspend fun refreshAsteroids() {
         withContext(Dispatchers.IO) {
             try {
-                val asteroids = NasaApiService.AsteroidApi.retrofitService.getAsteroids(
-                    Constants.API_KEY
-                )
+                val asteroids = NasaApiService.AsteroidApi.retrofitService.getAsteroids()
                 val result = parseAsteroidsJsonResult(JSONObject(asteroids))
                 database.asteroidDao.insertAll(*result.asDatabaseModel())
-                Log.d("Refresh Asteroids", "Success")
+                Timber.tag("Refresh Asteroids").d("Success")
             } catch (err: Exception) {
-                Log.e("Failed: AsteroidRepFile", err.message.toString())
+                Timber.tag("Failed: AsteroidRepFile").e(err.message.toString())
             }
         }
     }

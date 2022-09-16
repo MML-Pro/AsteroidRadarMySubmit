@@ -8,11 +8,11 @@ import com.udacity.asteroidradar.PictureOfDay
 import com.udacity.asteroidradar.api.NasaApiService
 import com.udacity.asteroidradar.database.getDatabase
 import com.udacity.asteroidradar.repository.AsteroidRepository
-import com.udacity.asteroidradar.util.Constants
 import com.udacity.asteroidradar.util.FilterAsteroid
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 private const val TAG = "MainViewModel"
 class MainViewModel(application: Application) : AndroidViewModel(application) {
@@ -63,10 +63,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         withContext(Dispatchers.IO) {
             try {
                 _pictureOfDay.postValue(
-                    NasaApiService.AsteroidApi.retrofitService.getPictureOfTheDay(Constants.API_KEY)
+                    NasaApiService.AsteroidApi.retrofitService.getPictureOfTheDay()
                 )
             } catch (err: Exception) {
-                Log.e("refreshPictureOfDay", err.printStackTrace().toString())
+                Timber.tag("refreshPictureOfDay").e(err.printStackTrace().toString())
             }
         }
     }

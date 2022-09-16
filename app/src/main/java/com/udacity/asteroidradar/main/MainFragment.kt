@@ -19,19 +19,12 @@ import com.udacity.asteroidradar.util.FilterAsteroid
 
 private const val TAG = "MainFragment"
 
-class MainFragment : Fragment() , MenuProvider{
+class MainFragment : Fragment(), MenuProvider {
 
     private lateinit var menuHost: MenuHost
 
-    private val viewModelFactory: ViewModelFactory by lazy {
-        ViewModelFactory(app = requireActivity().application)
-    }
-
     private val viewModel: MainViewModel by lazy {
-        ViewModelProvider(
-            this,
-            viewModelFactory
-        )[MainViewModel::class.java]
+        ViewModelProvider(this)[MainViewModel::class.java]
     }
 
     private val asteroidAdapter = AsteroidsAdapter(AsteroidsAdapter.AsteroidListener { asteroid ->
@@ -47,7 +40,7 @@ class MainFragment : Fragment() , MenuProvider{
 
         menuHost = requireActivity()
 
-        menuHost.addMenuProvider(this,viewLifecycleOwner,Lifecycle.State.CREATED)
+        menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.CREATED)
 
         binding.viewModel = viewModel
         binding.asteroidRecycler.adapter = asteroidAdapter
@@ -77,7 +70,6 @@ class MainFragment : Fragment() , MenuProvider{
             }
         }
     }
-
 
 
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
